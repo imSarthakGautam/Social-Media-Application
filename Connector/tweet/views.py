@@ -22,7 +22,7 @@ def tweet_create(request):
         form= TweetForm(request.POST, request.FILES)
 
         if form.is_valid():
-            tweet=form.save(commit='false')
+            tweet=form.save(commit=False)
             tweet.user = request.user
             tweet.save()
             return redirect('tweet_list')
@@ -36,7 +36,7 @@ def tweet_edit(request, tweet_id):
         form=form= TweetForm(request.POST, request.FILES, instance=tweet)
 
         if form.is_valid():
-            tweet=form.save(commit='false')
+            tweet=form.save(commit= False )
             tweet.user = request.user
             tweet.save()
             return redirect('tweet_list')
@@ -58,6 +58,6 @@ def tweet_delete(request, tweet_id):
     
         # Redirect to the tweet list after deletion
         return redirect('tweet_list')
-    return render(request, 'tweet_confirm_delete.html', {'form':form})
+    return render(request, 'tweet_delete.html')
 
 
